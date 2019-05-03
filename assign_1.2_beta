@@ -1,0 +1,73 @@
+x = input("Enter a string: ")
+y = input("Enter a pattern: ")
+
+m = len(x)
+
+result = ''
+temp = 'Null'
+j = 0
+i = 0
+
+for i in range(len(x)):
+
+    print('\n')
+    print('looping '+ str(i))
+    
+    if i < m + 1:
+        print('First block with i value'+ str(i))
+        temp = x[i]
+        result += x[i]
+        j = j + 1
+        i = i + 1
+        print('Exiting block with j value'+ str(j))
+        print('Exiting block with i value'+ str(i))
+        
+         
+    elif y[j] == '.':
+        print('Second block with i value'+ str(i))
+        result += x[i]
+        j = j + 1
+        i = i + 1
+        print('Exiting block with j value'+ str(j))
+        print('Exiting block with i value'+ str(i))
+        
+        if i != m:
+            temp = x[i]
+            
+    elif y[j] == '*':        
+        if i == 0 or temp == 'Null':
+            print('Third-A block with i value'+ str(i))
+            j = j + 1
+            print('Exiting block with j value'+ str(j))
+            print('Exiting block with i value'+ str(i))
+            break
+        
+        if  i != m + 1:
+            if temp == x[i]:
+                print('Third-B block with i value'+ str(i))
+                result += x[i]
+                i = i + 1
+                print('Exiting block with j value'+ str(j))
+                print('Exiting block with i value'+ str(i))
+                
+            else:
+                print('Third-C block with i value'+ str(i))
+                temp = x[i]
+                result += x[i]
+                j = j + 1
+                #i = i - 1
+                print('Exiting block with j value'+ str(j))
+                print('Exiting block with i value'+ str(i))
+    else:
+        break
+    print("Temp: ",temp)
+                   
+    print("Result: ", result)
+
+
+print('Result: ',result)
+if x == result:
+    print('True')
+else:
+    print('False')
+    
