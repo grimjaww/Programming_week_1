@@ -4,7 +4,7 @@ y = input("Enter a pattern: ")
 m = len(x)
 
 result = ''
-loop, count = 0, 0
+#loop, count = 0, 0
 j = 0
 i = 0
 
@@ -27,7 +27,7 @@ for i in range(len(x)):
                     break
     else:
         break
-loop = loop + 1
+#loop = loop + 1
 
 if result in x:
     print('True')
