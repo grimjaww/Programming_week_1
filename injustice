@@ -1,0 +1,211 @@
+import random
+
+full_deck = []
+graveyard = []
+
+global player1
+global player2
+
+global number
+number = 1
+
+#creating deck
+class Injustice_deck:
+    
+    def characterStats(self, name, strength, attack, defence, health):
+        self.name = name
+        self.strength = strength
+        self.attack = attack
+        self.defence = defence
+        self.health = health
+        
+    def showStats(self):
+        return{
+            "Character name" : str(self.name) , 
+            "Strength" : str(self.strength) , 
+            "Attack" : str(self.attack) , 
+            "Defence" : str(self.defence) , 
+            "HP" : str(self.health)
+            }
+    
+
+#Dealing cards to players
+class cardDealing:
+    def __init__(self):
+        gamePoint = 0
+        dice_roll = 0
+        self.deck = []
+        self.playerNumber = 0
+        self.godSpell = 0
+        self.ressurection = 0
+        godFlag = 0
+        resFlag = 0
+    
+    
+    def createPlayer(self, name):
+        global number
+        self.name = name
+        self.dice_roll = random.randrange(1,6)
+        self.playerNumber = number
+        number = number + 1
+
+        self.godSpell = 0
+        self.ressurection = 0
+
+        if(self.playerNumber == 1):
+            for i, card_from_deck in enumerate(full_deck):
+                if(i % 2 == 0):
+                    self.deck.append(full_deck[i])
+        else:
+            for i, card_from_deck in enumerate(full_deck):
+                if(i % 2 != 0):
+                    self.deck.append(full_deck[i])
+                                 
+        print("\nPlayer Name: " + str(self.name) + "\nPlayer Number: " + str(self.playerNumber) + "\nYour Dice Number is: " + str(self.dice_roll))
+        #print(self.deck[0])
+
+
+
+    def beginGame(self):
+        n = 1
+        print("Round " + str(n) + " fight!!")
+    
+    
+        if self.playerNumber == 1:
+            print(player1.deck[0])
+            card1 = player1.deck.pop(0)
+            graveyard.append(card1)
+            card2 = drawCard(2)
+        else:
+            print(player2.deck[0])
+            card2 = player2.deck.pop(0)
+            graveyard.append(card2)
+            card1 = drawCard(1)
+    
+    
+    
+        print("Select Your Stats \nPress : 1->Strength \n2->Attack \n3->Defence \n4->HP \n")
+        choice = input("You selected: ")
+        if (choice == 1):
+            if (card1[strength] > card2[strength]):
+                print("Player 1 WINS")
+                player1.gamePoint = player1.gamePoint + 1 
+                if(len(player1.deck) and len(player2.deck) > 0):
+                    player1.beginGame()
+                else:
+                    gameOver()
+            elif (card1[strength] < card2[strength]):
+                print("Player 2 WINS")
+                player2.gamePoint = player2.gamePoint + 1 
+                if(len(player1.deck) and len(player2.deck) > 0):
+                    player2.beginGame()
+                else:
+                    gameOver()
+                
+        elif choice == 2:
+            if (card1[attack] > card2[defence]):
+                print("Player 1 WINS")
+                player1.gamePoint = player1.gamePoint + 1 
+                if(len(player1.deck) and len(player2.deck) > 0):
+                    player1.beginGame()
+                else:
+                    gameOver()
+            elif (card1[attack] < card2[defence]):
+                print("Player 2 WINS")
+                player2.gamePoint = player2.gamePoint + 1 
+                if(len(player1.deck) and len(player2.deck) > 0):
+                    player2.beginGame()
+                else:
+                    gameOver()
+
+        elif choice == 3:
+            if (card1[defence] > card2[attack]):
+                print("Player 1 WINS")
+                player1.gamePoint = player1.gamePoint + 1 
+                if(len(player1.deck) and len(player2.deck) > 0):
+                    player1.beginGame()
+                else:
+                    gameOver()
+            elif (card1[defence] < card2[attack]):
+                print("Player 2 WINS")
+                player2.gamePoint = player2.gamePoint + 1 
+                if(len(player1.deck) and len(player2.deck) > 0):
+                    player2.beginGame()
+                else:
+                    gameOver()
+        elif choice == 4:
+            if (card1[hp] > card2[hp]):
+                print("Player 1 WINS")
+                player1.gamePoint = player1.gamePoint + 1 
+                if(len(player1.deck) and len(player2.deck) > 0):
+                    player1.beginGame()
+                else:
+                    gameOver()
+            elif (card1[hp] < card2[hp]):
+                print("Player 2 WINS")
+                player2.gamePoint = player2.gamePoint + 1 
+                if(len(player1.deck) and len(player2.deck) > 0):
+                    player2.beginGame()
+                else:
+                    gameOver()
+        else:
+            print("Invalid Choice")
+        
+
+
+def playerTurn():
+    if player1.dice_roll > player2.dice_roll:
+        player1.beginGame()
+    elif player1.dice_roll == player2.dice_roll:
+        player1.beginGame()
+    else:
+        player2.beginGame()
+        
+def drawCard(p):
+    if p == 1:
+        playCard = player1.deck.pop(0)
+        graveyard.append(playCard)
+        return playCard
+    else:
+        playCard = player2.deck.pop(0)
+        graveyard.append(playCard)
+        return playCard
+    
+def gameOver():
+    if player1.gamePoint > player2.gamePoint:
+        print("Player 1: " + player1.name + "Wins")
+    elif player1.gamePoint == player2.gamePoint:
+        print("Draw")
+    else:
+        print("Player 2: " + player2.name + "Wins")
+        
+def godSpell(self):
+    pass
+    #if self.godFlag == 0:
+        
+
+def ressurection(self):
+    pass
+
+def shuffle():
+    random.shuffle(graveyard)
+        
+list_of_awesome_heroes = ['aquaman', 'superman', 'batman', 'wonder women', 'night wing', 'swamp thing']
+n = len(list_of_awesome_heroes)
+
+for hero in list_of_awesome_heroes:
+    name = hero
+    hero = Injustice_deck()
+    hero.characterStats(name,random.randrange(1000, 5000),random.randrange(1000, 5000),random.randrange(1000, 5000),random.randrange(1000, 5000))
+    full_deck.append(hero.showStats())
+
+
+
+player1 = cardDealing()
+player1.createPlayer('Goku')
+player2 = cardDealing()
+player2.createPlayer('Vegeta')
+playerTurn()
+
+
+
